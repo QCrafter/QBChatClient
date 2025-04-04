@@ -26,7 +26,7 @@ fun sendGetRequest(url: String): String {
 fun main() {
 
     SwingUtilities.invokeLater {
-        val window = JFrame()
+        val window = JFrame("QBChat Client")
         window.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
         window.isResizable = false
         window.layout = null
@@ -40,21 +40,23 @@ fun main() {
         val scrollField = JScrollPane(messageList)
         scrollField.setBounds(0, 0, 600, 780)
         var userName = ""
+        var ip = ""
         val textInput = JTextField("Enter user name: ")
         textInput.setBorder(LineBorder(Color.red, 1))
         textInput.setBounds(0, 800, 600, 100)
-
-//TODO IP-Addresse über GUI ändern
 
         textInput.addKeyListener(object : KeyListener {
             override fun keyTyped(e: KeyEvent) {
                 if (e.keyChar == '\n') {
                     if (userName == "") {
                         userName = textInput.text.replace("Enter user name: ", "")
+                        textInput.text = "Enter Server IP address: "
+                    } else if (ip == "") {
+                        ip = textInput.text.replace("Enter Server IP address: ", "")
                         textInput.text = ""
                     } else {
                         val url =
-                            "http://192.168.4.175/" + userName + ":_!_" + textInput.text.replace(
+                            "http://$ip/$userName:_!_" + textInput.text.replace(
                                 " ",
                                 "_!_"
                             ) + "_qbchat_"
@@ -74,13 +76,13 @@ fun main() {
         var oldText = ""
         var text: String
         val timer = Timer(1000) {
-
-            text = sendGetRequest("http://192.168.4.175/")
-            if (text != oldText) {
-                messageList.text = text.replace("_!_", " ")
-                oldText = text
+            if (ip != "") {
+                text = sendGetRequest("http://$ip")
+                if (text != oldText) {
+                    messageList.text = text.replace("_!_", " ")
+                    oldText = text
+                }
             }
-
         }
         timer.start()
     }
