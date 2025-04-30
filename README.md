@@ -92,7 +92,7 @@ fun main() {
 }
 ```
 
-Server (part of unreleased qBruce Firmware):
+Server (part of my unreleased qBruce Esp32 Firmware forked from https://github.com/pr3y/Bruce):
 ```cpp
 void qbchat_server() {
     delay(200);
