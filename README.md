@@ -136,7 +136,7 @@ void qbchat_server() {
                } else if (c != '\r') {  // if you got anything else but a carriage return character,
                  currentLine += c;      // add it to the end of the currentLine
                }
-       //TODO block message = just "_qbchat_"
+       //read and send message
                if (currentLine != "" && currentLine != oldLine && currentLine != "_qbchat_" && currentLine.endsWith("_qbchat_")) {
                 String message = currentLine.substring(5,currentLine.length()-8);
                 Serial.println("CURRENT LINE:  "+currentLine);
