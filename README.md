@@ -92,7 +92,7 @@ fun main() {
 }
 ```
 
-Server:
+Server (part of unreleased qBruce Firmware):
 ```cpp
 void qbchat_server() {
     delay(200);
